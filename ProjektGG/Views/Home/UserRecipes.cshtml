@@ -1,0 +1,64 @@
+﻿@model ProjektGG.ViewModels.RecipeModels.UserRecipesVM
+
+
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/Content/bootstrap.css" rel="stylesheet">
+    <link href="/Content/site.css" rel="stylesheet">
+    <script src="/Scripts/modernizr-2.8.3.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="text-align:left" href="~/Home/Przepisy"> Przepisy </a>
+                <a class="navbar-brand" href="~/Home/Create"> Dodaj Przepis</a>
+
+            </div>
+            <a class="navbar-brand pull-right" href="~/Authentication/Logout">Wyloguj</a>
+            <span class="navbar-brand pull-right" style="color:white">@Model.loggedUser</span>
+            <div class="navbar-collapse collapse">
+                <u1 class="nav navbar-nav0"></u1>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <h2>Moje Przepisy</h2>
+
+        <table class="table">
+
+            @foreach (var item in Model.Recipes)
+            {
+                <tr>
+                    <td style="width:110px">
+                        <img src="~/Images/@item.ImgName" alt="Brak zdjecia" width="100" height="100" />
+                    </td>
+                    <td style="width: 200px">
+                        @item.Name
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edycja", "Edit", new {  id=item.ID  }) |
+                        @Html.ActionLink("Szczegóły", "Details", new {  id=item.ID  }) |
+                        @Html.ActionLink("Usuń", "Delete", new { id=item.ID })
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <script src="/Scripts/jquery-3.3.1.js"></script>
+    <script src="/Scripts/bootstrap.js"></script>
+</body>
+</html>
+

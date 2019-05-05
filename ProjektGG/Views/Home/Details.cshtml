@@ -1,0 +1,138 @@
+﻿@model ProjektGG.ViewModels.RecipeModels.DetailsVM
+
+@{
+    //ViewBag.Title = "Dodawanie nowego przepisu!";
+    Layout = null;
+}
+
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/Content/bootstrap.css" rel="stylesheet">
+    <link href="/Content/site.css" rel="stylesheet">
+    <script src="/Scripts/modernizr-2.8.3.js"></script>
+    <script type="text/javascript">
+        $('#element').html($('p').html().replace(/\\r\\n/g, "<br />"));
+    </script>
+
+
+    <style>
+        .div1 {
+            height: 100px;
+            min-width: 100px;
+        }
+
+        .span1 {
+            height: 100px;
+            width: 100px;
+        }
+
+        .article {
+            width: 1000px;
+            float: left;
+            height: 500px;
+        }
+
+        .col-1 {
+            float: left;
+            width: 53%;
+  
+        }
+
+        .col-2 {
+            float: left;
+            width: 40%;
+
+        }
+        .col-3{
+            float:left;
+            width: 7%;
+        }
+
+        .col-3-1{
+            width:50%;
+            height:40px;
+            float:left;
+        }
+        .col-3-2{
+            width:50%;
+            height:40px;
+            float: left;
+        }
+
+        .heart {
+            background-image: url(../Images/serce.png);
+            height: 30px;
+            width: 35px;
+            display: block;
+            text-indent: -9999px;
+        }
+
+        .emptyHeart {
+            background-image: url(../Images/emptyHeart.jpg);
+            height: 28px;
+            width: 30px;
+            display: block;
+            text-indent: -9999px;
+        }
+
+        .row-1 {
+            height: 10px;
+        }
+
+        .textarea {
+            resize: none;
+            outline: none;
+            border: none;
+            height: auto;
+        }
+        .cupboard {
+            background-image: url(../Images/chest2.png);
+            height: 30px;
+            width: 30px;
+            display: block;
+            text-indent: -9999px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="text-align:left" href="~/Home/Przepisy"> Przepisy </a>
+            </div>
+            @if (Model.loggedUser.Equals(""))
+            {<a class="navbar-brand pull-right" style="text-align:right" href="~/Authentication/Login">Zaloguj</a> }
+            else
+            {<a class="navbar-brand pull-right" href="~/Authentication/Logout">Wyloguj</a>
+                <span class="navbar-brand pull-right" style="color:white">  @Model.loggedUser</span>
+            }
+            <div class="navbar-collapse collapse">
+                <u1 class="nav navbar-nav0"></u1>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="article">
+            <div class="row-1"></div>
+            <div class="col-1">
+                <h2>@Model.Recipe.Name</h2>
+                <span style="white-space: pre-line">@Model.Recipe.Description</span>
+                <br />
+                <br />
+                Przepis dodał: @Model.Recipe.Username
+            </div>
+            <div class="col-2">
+                <img src="~/Images/@Model.Recipe.ImgName" width="400" height="400" />
+            </div>
+        </div>
+    </div>
+    <script src="/Scripts/jquery-3.3.1.js"></script>
+    <script src="/Scripts/bootstrap.js"></script>
+</body>
+</html>
+
+
+

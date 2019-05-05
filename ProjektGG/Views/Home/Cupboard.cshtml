@@ -1,0 +1,117 @@
+﻿@model ProjektGG.ViewModels.RecipeModels.CupboardVM
+@{
+    
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/Content/bootstrap.css" rel="stylesheet">
+    <link href="/Content/site.css" rel="stylesheet">
+    <script src="/Scripts/modernizr-2.8.3.js"></script>
+    <style>
+        .article {
+            width: 800px;
+        }
+
+        .col-0 {
+            float: left;
+            width: 10%;
+            height: 160px;
+        }
+
+        .col-1 {
+            float: left;
+            width: 20%;
+            height: 160px;
+        }
+
+        .col-2 {
+            float: left;
+            width: 65%;
+            height: 160px;
+        }
+
+        .col-3 {
+            float: left;
+            height: 160px;
+            width: 15%;
+        }
+
+
+        .row-1 {
+            height: 10%;
+        }
+
+        .row-2 {
+            height: 90%;
+        }
+
+        .row-header{
+            width: 800px;
+            height: 80px;
+        }
+        .delete-cupboard{
+            text-align: right;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="text-align:left" href="~/Home/Przepisy"> Przepisy </a>
+                <span style="text-align:right"><a class="navbar-brand" href="~/Home/UserRecipes">Moje Przepisy</a></span>
+
+            </div>
+
+            @if (Model.loggedUser.Equals(""))
+            {<a class="navbar-brand pull-right" style="text-align:right" href="~/Authentication/Login">Zaloguj</a> }
+            else
+            {<a class="navbar-brand pull-right" href="~/Authentication/Logout">Wyloguj</a>
+                <span class="navbar-brand pull-right" style="color:white">  @Model.loggedUser</span>
+            }
+            <div class="navbar-collapse collapse">
+                <u1 class="nav navbar-nav0"></u1>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="row-header">
+            <h2 style="text-align:left">Schowek</h2>
+            @Html.ActionLink("Usuń wszystkie przepisy ze schowka", "DeleteCupboard", null, new { @class = "delete-cupboard" })
+        </div>
+        
+        @foreach (var item in Model.Recipes)
+        {
+
+            <div class="article">
+
+                <div class="col-1">
+                    <a href="~/Images/@item.ImgName"><img src="~/Images/@item.ImgName" alt="Brak zdjecia" width="150" height="150" /></a>
+                </div>
+                <div class="col-2">
+                    <a href="~/Home/Details/@item.ID"><h2 style="text-align:start">@item.Name</h2></a>
+                    <br />
+                    <br />
+                    <h4>Przepis dodał: @item.Username</h4>
+                </div>
+                <div class="col-3">
+                    <div class="row-1"></div>
+                    <div class="row-2">@Html.ActionLink("Usuń ze schowka", "DeleteFromCupboard", new { id = item.ID })</div>
+                </div>
+            </div>
+
+        }
+
+    </div>
+    <script src="/Scripts/jquery-3.3.1.js"></script>
+    <script src="/Scripts/bootstrap.js"></script>
+</body>
+</html>
+
+
+

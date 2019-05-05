@@ -1,0 +1,150 @@
+﻿@model ProjektGG.ViewModels.RecipeModels.RecipeListVM
+
+@{
+    //ViewBag.Title = "Przepisy";
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/Content/bootstrap.css" rel="stylesheet">
+    <link href="/Content/site.css" rel="stylesheet">
+    <script src="/Scripts/modernizr-2.8.3.js"></script>
+    <style>
+        .article {
+            width: 800px;
+        }
+
+        .col-0 {
+            float: left;
+            width: 10%;
+            height: 160px;
+        }
+
+        .col-1 {
+            float: left;
+            width: 20%;
+            height: 160px;
+        }
+
+        .col-2 {
+            float: left;
+            width: 65%;
+            height: 160px;
+        }
+        .col-3{
+            float: left;
+            height: 160px;
+            width: 5%;
+        }
+        .col-4{
+            float:left;
+            height: 40px;
+            width: 5%;
+            text-align: center;
+            font-size: 22px;
+        }
+        .col-5{
+            float:left;
+            width:5%;
+        }
+        .row-1 {
+            height: 24px;
+        }
+        .row-2 {
+            
+        }
+
+        .heart {
+            background-image: url(../Images/serce.png);
+            height: 30px;
+            width: 35px;
+            display: block;
+            text-indent: -9999px;
+        }
+
+        .emptyHeart {
+            background-image: url(../Images/emptyHeart.jpg);
+            height: 28px;
+            width: 30px;
+            display: block;
+            text-indent: -9999px;
+        }
+
+        .cupboard {
+            background-image: url(../Images/chest.png);
+            height: 30px;
+            width: 30px;
+            display: block;
+            text-indent: -9999px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="text-align:left" href=""> Przepisy </a>
+                <span style="text-align:right"><a class="navbar-brand" href="~/Home/UserRecipes">Moje Przepisy</a></span>
+
+            </div>
+            
+            @if(Model.loggedUser.Equals(""))
+            {<a class="navbar-brand pull-right" style="text-align:right" href="~/Authentication/Login">Zaloguj</a> }
+            else
+            {<a class="navbar-brand pull-right" href="~/Authentication/Logout">Wyloguj</a>
+                <span class="navbar-brand pull-right" style="color:white">  @Model.loggedUser</span>
+            }
+            <a class="navbar-brand pull-right" href="~/Home/Cupboard">Schowek</a>
+            <div class="navbar-collapse collapse">
+                <u1 class="nav navbar-nav0"></u1>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <h2>Przepisy</h2>
+        <hr />
+        @foreach (var item in Model.Recipes)
+        {
+
+        <div class="article">
+
+            <div class="col-1">
+                <a href="~/Images/@item.ImgName"><img src="~/Images/@item.ImgName" alt="Brak zdjecia" width="150" height="150" /></a>
+            </div>
+            <div class="col-2">
+                <a href="~/Home/Details/@item.ID"><h2 style="text-align:start">@item.Name</h2></a>
+                <br />
+                <br />
+                <h4>Przepis dodał: @item.Username</h4>
+            </div>
+            <div class="col-3">
+                <div class="row-1"></div>
+                <div class="row-2">@Html.ActionLink(" ", "Like", new { id = item.ID }, new { @class = Model.IsRatedBefore(item.ID) })</div>
+            </div>
+            <div class="col-4">
+                <div class="row-1"></div>
+                <div class="row-2">@item.Rate</div>
+            </div>
+            <div class="col-5">
+                <div class="row-1"></div>
+                <div class="row-2">
+                    @if (item.IsInCupboard == 0)
+                    {
+                        @Html.ActionLink(" ", "AddToCupboard", new { id = item.ID }, new { @class = "cupboard" })
+                    }
+                </div>
+            </div>
+        </div>
+        }
+
+    </div>
+    <script src="/Scripts/jquery-3.3.1.js"></script>
+    <script src="/Scripts/bootstrap.js"></script>
+</body>
+</html>
+
+
+

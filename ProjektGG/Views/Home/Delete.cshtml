@@ -1,0 +1,52 @@
+﻿@model ProjektGG.ViewModels.RecipeModels.DeleteVM
+
+@{
+    Layout = null;
+}
+
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/Content/bootstrap.css" rel="stylesheet">
+    <link href="/Content/site.css" rel="stylesheet">
+    <script src="/Scripts/modernizr-2.8.3.js"></script>
+    <style>
+        .div1 {
+            height: 100px;
+            min-width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="text-align:left" href="~/Home/Przepisy"> Przepisy </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <u1 class="nav navbar-nav0"></u1>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm())
+    {
+    <div class="container body-content">
+        <h2>Czy chcesz usunąć przepis: @Model.Recipe.Name ?</h2>
+        <table class="table">
+            <tr>
+                <td><span style="white-space: pre-line">@Model.Recipe.Description</span></td>
+            </tr>
+            <tr>
+                <td><img src="~/Images/@Model.Recipe.ImgName" width="200" height="200"/></td>
+            </tr>
+        </table>
+        <input type="submit" value="Zatwierdź" class="btn btn-default"/>
+    </div>
+    }
+</body>
+</html>
+
+
+
