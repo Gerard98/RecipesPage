@@ -10,7 +10,7 @@ namespace ProjektGG.DAL
     public class DB : DbContext
     {
 
-        public DB() : base("ProjektDB2")
+        public DB() : base("ProjektDB3")
         {
 
         }
@@ -82,11 +82,14 @@ namespace ProjektGG.DAL
 
         public void EditRecipe(Recipe recipe)
         {
-            Recipe oldRecipe = new Recipe();
-            oldRecipe = GetRecipeList().Where(m => m.ID == recipe.ID).Single();
-            recipsesDB.Remove(oldRecipe);
-            recipe.ID = oldRecipe.ID;
-            recipsesDB.Add(recipe);
+
+            using (var context = new DB())
+            {
+                string query = "Update Tbl_Recipes Set Name = '" +recipe.Name + "' ,Description = '"+recipe.Description+"', ImgName = '" +recipe.ImgName+"' where ID = " +recipe.ID;
+                context.Database.ExecuteSqlCommand(query);
+            }
+
+
             SaveChanges();
 
         }
